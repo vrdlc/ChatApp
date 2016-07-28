@@ -3,16 +3,19 @@ package delacruz.chatapp.Models;
 import java.util.ArrayList;
 import java.util.Date;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
- * Created by Ramon on 7/28/16.
+ * Model that stores Message information, like sender, recipient, and content
  */
 public class Message {
-    private String id;
-    private String convoId;
-    private String messageContent;
-    private String senderName;
-    private ArrayList<User> receiverName;
-    private Date postDate;
+    @Getter @Setter private String id;
+    @Getter @Setter private String convoId;
+    @Getter @Setter private String messageContent;
+    @Getter @Setter private String senderName;
+    @Getter @Setter private ArrayList<User> receiverName;
+    @Getter @Setter private Date postDate;
 
     public Message() {}
 
@@ -24,53 +27,4 @@ public class Message {
         this.receiverName = receiverName;
         this.postDate = postDate;
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getConvoId() {
-        return convoId;
-    }
-
-    public void setConvoId(String convoId) {
-        this.convoId = convoId;
-    }
-
-    public String getMessageContent() {
-        return messageContent;
-    }
-
-    public void setMessageContent(String messageContent) {
-        this.messageContent = messageContent;
-    }
-
-    public String getSenderName() {
-        return senderName;
-    }
-
-    public void setSenderName(String senderName) {
-        this.senderName = senderName;
-    }
-
-    public ArrayList<User> getReceiverName() {
-        return receiverName;
-    }
-
-    public void setReceiverName(ArrayList<User> receiverName) {
-        this.receiverName = receiverName;
-    }
-
-    public Date getPostDate() {
-        return postDate;
-    }
-
-    public void setPostDate(Date postDate) {
-        this.postDate = postDate;
-    }
-
 }
