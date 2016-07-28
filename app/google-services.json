@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "637536698474",
+    "firebase_url": "https://chatapp-9abc9.firebaseio.com",
+    "project_id": "chatapp-9abc9",
+    "storage_bucket": "chatapp-9abc9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637536698474:android:9c50b32be18363c3",
+        "android_client_info": {
+          "package_name": "delacruz.chatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "637536698474-8u7nm5geo28bnq673o2sjtfhskb25ofd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiOfF6UaiieiKL_PL61hHzoUgIX6jUOMo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
