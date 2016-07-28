@@ -1,13 +1,15 @@
-package delacruz.chatapp;
+package delacruz.chatapp.Views;
+
 
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -20,25 +22,37 @@ import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import delacruz.chatapp.R;
 
-public class CreateAccountActivity extends AppCompatActivity implements View.OnClickListener {
-    private static final String TAG = CreateAccountActivity.class.getSimpleName();
+/**
+ * Extends CreateAccountActivity, handles all user input
+ */
+public class CreateAccountFragment extends Fragment implements View.OnClickListener{
+    private static final String TAG = CreateAccountFragment.class.getSimpleName();
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     public ProgressDialog mProgressDialog;
 
-    @Bind(R.id.emailText) EditText mEmailText;
+    @Bind(R.id.emailText)
+    EditText mEmailText;
     @Bind(R.id.passwordText) EditText mPasswordText;
     @Bind(R.id.confirmPassText) EditText mConfirmPassText;
-    @Bind(R.id.signUpButton) Button mSignUpButton;
+    @Bind(R.id.signUpButton)
+    Button mSignUpButton;
+
+    public CreateAccountFragment() {
+        // Required empty public constructor
+    }
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_account);
-        ButterKnife.bind(this);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_create_account, container, false);
+
+        ButterKnife.bind(getActivity());
+
 
         mSignUpButton.setOnClickListener(this);
         mAuth = FirebaseAuth.getInstance();
@@ -56,6 +70,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             }
 
         };
+        return view;
     }
 
 
@@ -92,7 +107,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         showProgressDialog();
 
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
@@ -102,13 +117,13 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
                         // signed in user can be handled in the listener.
 
                         if (!task.isSuccessful()) {
-                            Toast.makeText(CreateAccountActivity.this, R.string.auth_failed,
+                            Toast.makeText(getActivity(), R.string.auth_failed,
                                     Toast.LENGTH_SHORT).show();
                         }
                         hideProgressDialog();
                     }
                 });
-        }
+    }
     private boolean validateForm() {
         boolean valid = true;
 
@@ -134,7 +149,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
     public void showProgressDialog() {
         if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
+            mProgressDialog = new ProgressDialog(getActivity());
             mProgressDialog.setMessage(getString(R.string.loading));
             mProgressDialog.setIndeterminate(true);
         }
@@ -147,4 +162,5 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
             mProgressDialog.dismiss();
         }
     }
+
 }
